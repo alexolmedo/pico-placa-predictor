@@ -7,7 +7,6 @@ function handleClick () {
     alert('The license plate is invalid')
     return
   }
-  var lastdigit = parseInt(licensePlateString[licensePlateString.length - 1])
 
   // Check valid time
   var dateTimeString = $('#dateTime').val()
@@ -17,19 +16,17 @@ function handleClick () {
     return
   }
 
-  if (hasPicoPlaca(lastdigit, dateTime)) {
+  if (hasPicoPlaca(licensePlateString, dateTimeString)) {
     $('.alert-danger').toggleClass('d-none')
   } else {
     $('.alert-success').toggleClass('d-none')
   }
 }
 
-const hasPicoPlaca = (lastDigit, dateTime) => {
-  var timeOnly = moment(dateTime.format('HH:mm'), 'HH:mm')
-  var morningStart = moment('07:00', 'HH:mm')
-  var morningEnd = moment('09:30', 'HH:mm')
-  var afternoonStart = moment('16:00', 'HH:mm')
-  var afternoonEnd = moment('19:30', 'HH:mm')
+const hasPicoPlaca = (licensePlateString, dateTimeString) => {
+
+  var lastDigit = parseInt(licensePlateString[licensePlateString.length - 1])
+  var dateTime = moment(dateTimeString, moment.DATETIME_LOCAL)
 
   var rules = {
     'Monday': [1, 2],
@@ -40,13 +37,17 @@ const hasPicoPlaca = (lastDigit, dateTime) => {
     'Saturday': [],
     'Sunday': []
   }
+  var morningStart = moment('07:00', 'HH:mm')
+  var morningEnd = moment('09:30', 'HH:mm')
+  var afternoonStart = moment('16:00', 'HH:mm')
+  var afternoonEnd = moment('19:30', 'HH:mm')
 
+  var timeOnly = moment(dateTime.format('HH:mm'), 'HH:mm')
   if (timeOnly.isBetween(morningStart, morningEnd) || timeOnly.isBetween(afternoonStart, afternoonEnd)) {
     var dayOfWeek = dateTime.format('dddd')
     return rules[dayOfWeek].indexOf(lastDigit) >= 0
-  } else {
-    return false
   }
+  return false
 }
 
 const licensePlateIsValid = (licensePlateString) => {
