@@ -1,19 +1,25 @@
 function handleClick () {
 
-  var licensePlate = $('#licensePlateNumber').val()
-  var lastdigit = licensePlate[licensePlate.length - 1]
+  //Check valid license
+  var licensePlateString = $('#licensePlateNumber').val()
+  if (!licensePlateIsValid(licensePlateString)) {
+    alert('The license plate is invalid')
+    return
+  }
 
   var dateTimeRoadString = $('#dateTimeRoad').val()
   var dateTimeRoad = moment(dateTimeRoadString, moment.DATETIME_LOCAL)
-
   if (!dateTimeRoad.isValid()) {
-    console.log('Invalid time')
+    alert('The date and time are invalid')
+    return
   }
+
+  var lastdigit = licensePlateString[licensePlateString.length - 1]
   console.log(hasPicoPlaca(lastdigit, dateTimeRoad))
 
 }
 
-function hasPicoPlaca (lastDigit, dateTimeRoad) {
+const hasPicoPlaca = (lastDigit, dateTimeRoad) => {
   var timeOnly = moment(dateTimeRoad.format('HH:mm'), 'HH:mm')
   var morningStart = moment('07:00', 'HH:mm')
   var morningEnd = moment('09:30', 'HH:mm')
@@ -25,4 +31,9 @@ function hasPicoPlaca (lastDigit, dateTimeRoad) {
   } else {
     return false
   }
+}
+
+const licensePlateIsValid = (licensePlateString) => {
+  // Check if plates are in format ABC-1234 or AB-1234, case insensitive
+  return licensePlateString.match(/^[A-Za-z]{3}-[1-9]{4}$|^[A-Za-z]{2}-[1-9]{4}$/)
 }
