@@ -24,15 +24,9 @@ function handleClick () {
 }
 
 const hasPicoPlaca = (licensePlateString, dateTimeString) => {
-  console.log(dateTimeString)
+
   var lastDigit = parseInt(licensePlateString[licensePlateString.length - 1])
   var dateTime = moment(dateTimeString, moment.DATETIME_LOCAL)
-
-  var timeOnly = moment(dateTime.format('HH:mm'), 'HH:mm')
-  var morningStart = moment('07:00', 'HH:mm')
-  var morningEnd = moment('09:30', 'HH:mm')
-  var afternoonStart = moment('16:00', 'HH:mm')
-  var afternoonEnd = moment('19:30', 'HH:mm')
 
   var rules = {
     'Monday': [1, 2],
@@ -43,13 +37,17 @@ const hasPicoPlaca = (licensePlateString, dateTimeString) => {
     'Saturday': [],
     'Sunday': []
   }
+  var morningStart = moment('07:00', 'HH:mm')
+  var morningEnd = moment('09:30', 'HH:mm')
+  var afternoonStart = moment('16:00', 'HH:mm')
+  var afternoonEnd = moment('19:30', 'HH:mm')
 
+  var timeOnly = moment(dateTime.format('HH:mm'), 'HH:mm')
   if (timeOnly.isBetween(morningStart, morningEnd) || timeOnly.isBetween(afternoonStart, afternoonEnd)) {
     var dayOfWeek = dateTime.format('dddd')
     return rules[dayOfWeek].indexOf(lastDigit) >= 0
-  } else {
-    return false
   }
+  return false
 }
 
 const licensePlateIsValid = (licensePlateString) => {

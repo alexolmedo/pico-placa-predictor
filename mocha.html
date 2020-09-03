@@ -20,10 +20,22 @@
         it('for plate ABC-1231 and datetime 2020-08-31T08:16', function () {
           chai.assert.equal(hasPicoPlaca('ABC-1231', '2020-08-31T08:16'), true)
         })
+        it('for plate JFL-1234 and datetime 2020-09-08T09:16', function () {
+          chai.assert.equal(hasPicoPlaca('JFL-1234', '2020-09-08T09:16'), true)
+        })
+        it('for plate FGK-8948 and datetime 2020-09-24T17:55', function () {
+          chai.assert.equal(hasPicoPlaca('FGK-8948', '2020-09-24T17:55'), true)
+        })
       })
       describe('should return false', function () {
-        it('for plate ABC-1231 and datetime 2020-08-31T12:16', function () {
-          chai.assert.equal(hasPicoPlaca('ABC-1231', '2020-08-31T12:16'), false)
+        it('for plate LSW-1231 and datetime 2020-08-31T12:16', function () {
+          chai.assert.equal(hasPicoPlaca('LSW-1231', '2020-08-31T12:16'), false)
+        })
+        it('for plate ABC-1234 and datetime 2020-09-08T13:24', function () {
+          chai.assert.equal(hasPicoPlaca('ABC-1234', '2020-09-08T13:24'), false)
+        })
+        it('for plate FGK-8948 and datetime 2020-09-24T23:49', function () {
+          chai.assert.equal(hasPicoPlaca('FGK-8948', '2020-09-24T23:49'), false)
         })
       })
     })
