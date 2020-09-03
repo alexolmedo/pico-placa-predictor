@@ -1,4 +1,5 @@
 function handleClick () {
+  $('.alert-danger, .alert-success').addClass('d-none')
 
   // Check valid license
   var licensePlateString = $('#licensePlateNumber').val()
@@ -6,6 +7,7 @@ function handleClick () {
     alert('The license plate is invalid')
     return
   }
+  var lastdigit = parseInt(licensePlateString[licensePlateString.length - 1])
 
   // Check valid time
   var dateTimeString = $('#dateTime').val()
@@ -15,9 +17,11 @@ function handleClick () {
     return
   }
 
-  var lastdigit = parseInt(licensePlateString[licensePlateString.length - 1])
-  console.log(hasPicoPlaca(lastdigit, dateTime))
-
+  if (hasPicoPlaca(lastdigit, dateTime)) {
+    $('.alert-danger').toggleClass('d-none')
+  } else {
+    $('.alert-success').toggleClass('d-none')
+  }
 }
 
 const hasPicoPlaca = (lastDigit, dateTime) => {
