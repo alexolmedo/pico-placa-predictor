@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mocha Tests</title>
+  <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+          integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+          crossorigin="anonymous"></script>
+  <script src="scripts.js"></script>
+</head>
+<body>
+  <div id="mocha"></div>
+  <script src="https://unpkg.com/chai/chai.js"></script>
+  <script src="https://unpkg.com/mocha/mocha.js"></script>
+  <script>
+    mocha.setup('bdd')
+
+    describe('Pico y placa', function () {
+      describe('should return true', function () {
+        it('for plate ABC-1231 and datetime 2020-08-31T08:16', function () {
+          chai.assert.equal(hasPicoPlaca('ABC-1231', '2020-08-31T08:16'), true)
+        })
+      })
+      describe('should return false', function () {
+        it('for plate ABC-1231 and datetime 2020-08-31T12:16', function () {
+          chai.assert.equal(hasPicoPlaca('ABC-1231', '2020-08-31T12:16'), false)
+        })
+      })
+    })
+
+  </script>
+
+  <script>
+    mocha.run()
+  </script>
+</body>
+</html>
