@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Pico y Placa Predictor</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+          integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg=="
+          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"></script>
+  <script src="scripts.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-xl-6">
+
+        <div class="py-4">
+          <h1 class="text-center">Pico y placa predictor</h1>
+        </div>
+        <div class="pb-4">
+          This site will check whether your license plate can be on the road at any given time and day.
+        </div>
+
+        <form class="py-3">
+          <div class="form-group">
+            <label for="licensePlateNumber">1. Enter your license plate number:</label>
+            <input type="text" class="form-control" id="licensePlateNumber" placeholder="AAC-0123">
+          </div>
+
+          <div class="form-group">
+            <label for="dateTime">2. Select the date and time you plan to be on the road:</label>
+            <input type="datetime-local" class="form-control" id="dateTime">
+          </div>
+
+          <button type="button" onclick="handleClick()" class="mt-4 btn btn-primary btn-block">Check</button>
+        </form>
+
+        <div class="alert alert-success d-none">
+          Your car can be on the road at that day and time with no issues.
+        </div>
+
+        <div class="alert alert-danger d-none">
+          Your car can't be on the road at that date and time!
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
